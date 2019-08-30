@@ -1,7 +1,7 @@
 import zlib
 import base64
 import uuid
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import tempfile
 import subprocess as subp
 
@@ -27,10 +27,10 @@ def sign_request(urlencoded_request, private_key_file):
             stdout=subp.PIPE,
             stderr=subp.PIPE)
         out, err = proc.communicate()
-        print err
+        print(err)
 
     out = base64.b64encode(out)
-    return urllib.urlencode([("Signature", out),])
+    return urllib.parse.urlencode([("Signature", out),])
 
 
 class SignableRequest(object):

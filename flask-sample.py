@@ -1,5 +1,5 @@
 import os
-import ConfigParser
+import configparser
 
 from flask import Flask, render_template, request, redirect
 
@@ -8,7 +8,7 @@ from idporten.saml import AuthRequest, LogoutRequest, Response, LogoutResponse
 app = Flask(__name__)
 
 def read_config(config_file, config_path="."):
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config_path = os.path.expanduser(config_file)
     config_path = os.path.abspath(config_path)
     with open(config_path) as f:
@@ -37,14 +37,14 @@ def home():
     """Render home page."""
     auth_request = AuthRequest(**settings)
     url = auth_request.get_signed_url(settings["private_key_file"])
-    print "OUTGOING URL:", url
+    print("OUTGOING URL:", url)
     return redirect(url)
 
 
 @app.route('/logged_in', methods=['POST', "GET"])
 def logged_in():
-    print "USER LOGGED IN VIA IDPORTEN"
-    print request.values
+    print("USER LOGGED IN VIA IDPORTEN")
+    print(request.values)
     SAMLResponse = request.values['SAMLResponse']
 
     res = Response(
@@ -55,9 +55,9 @@ def logged_in():
 
     uid = res.get_decrypted_assertion_attribute_value("uid")
     name_id = res.name_id
-    print "UID", uid
-    print "NAME ID: ", name_id
-    print "Session index: ", res.get_session_index()
+    print("UID", uid)
+    print("NAME ID: ", name_id)
+    print("Session index: ", res.get_session_index())
     user_info["uid"] = uid
     user_info["name_id"] = name_id
     user_info["session_index"] = res.get_session_index()
@@ -66,26 +66,26 @@ def logged_in():
 
 @app.route('/log_me_out')
 def logout():
-    print "Logout requested"
+    print("Logout requested")
     logout_request = LogoutRequest(name_id=user_info["name_id"],
                                    session_index=user_info["session_index"],
                                    **settings)
-    print "Logout xml", logout_request.raw_xml
+    print("Logout xml", logout_request.raw_xml)
     url = logout_request.get_signed_url(settings["private_key_file"])
-    print "OUTGOING LOGOUT URL: ", url
+    print("OUTGOING LOGOUT URL: ", url)
     return redirect(url)
 
 @app.route('/logoutResponse')
 def handle_logout_response():
     SAMLResponse = request.values['SAMLResponse']
-    print "SAMLResponse", SAMLResponse
+    print("SAMLResponse", SAMLResponse)
 
     logout_response = LogoutResponse(SAMLResponse)
     if logout_response.is_success():
-        print "User was successfully logged out."
+        print("User was successfully logged out.")
         user_info = None
     else:
-        print "Logout failed."
+        print("Logout failed.")
 
     return render_template('home.html')
 

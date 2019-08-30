@@ -3,7 +3,7 @@ import base64
 from lxml import etree
 from datetime import datetime, timedelta
 
-from SignatureVerifier import SignatureVerifier
+from .SignatureVerifier import SignatureVerifier
 
 namespaces=dict(
     samlp='urn:oasis:names:tc:SAML:2.0:protocol',

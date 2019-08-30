@@ -39,7 +39,7 @@ class TestLogoutRequest(object):
         reparsed = minidom.parseString(logout_request.raw_xml)
         parsed_expected = minidom.parseString(expected_xml)
 
-        print reparsed.toprettyxml()
-        print parsed_expected.toprettyxml()
+        print(reparsed.toprettyxml())
+        print(parsed_expected.toprettyxml())
 
         eq(reparsed.toprettyxml(), parsed_expected.toprettyxml())

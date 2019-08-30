@@ -1,7 +1,7 @@
 import zlib
 import base64
 import uuid
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import tempfile
 import subprocess as subp
 
@@ -9,7 +9,7 @@ from datetime import datetime
 from lxml import etree
 from lxml.builder import ElementMaker
 
-from SignableRequest import SignableRequest
+from .SignableRequest import SignableRequest
 
 class LogoutRequest(SignableRequest):
     def __init__(self,

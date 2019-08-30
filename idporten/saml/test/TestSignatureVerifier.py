@@ -2,7 +2,7 @@ import fudge
 
 from lxml import etree
 from nose.tools import eq_ as eq
-from StringIO import StringIO
+from io import StringIO
 import platform
 
 from idporten.saml import SignatureVerifier, SignatureVerifierError

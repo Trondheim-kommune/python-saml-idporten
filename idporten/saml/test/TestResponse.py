@@ -399,7 +399,7 @@ class TestResponse(object):
             )
 
         def fake_clock():
-            return datetime(2004, 12, 05, 9, 16, 45, 462796)
+            return datetime(2004, 12, 0o5, 9, 16, 45, 462796)
         msg = assert_raises(
             ResponseValidationError,
             res.is_valid,
@@ -421,7 +421,7 @@ class TestResponse(object):
             )
 
         def fake_clock():
-            return datetime(2004, 12, 05, 9, 30, 45, 462796)
+            return datetime(2004, 12, 0o5, 9, 30, 45, 462796)
         msg = assert_raises(
             ResponseValidationError,
             res.is_valid,
@@ -444,7 +444,7 @@ class TestResponse(object):
             )
 
         def fake_clock():
-            return datetime(2004, 12, 05, 9, 18, 45, 462796)
+            return datetime(2004, 12, 0o5, 9, 18, 45, 462796)
 
         private_key_file = "/tmp/tes.txt"
         idp_cert_filename = "/tmp/junk.txt"

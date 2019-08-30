@@ -1,13 +1,13 @@
 import os
-import ConfigParser
+import configparser
 import optparse
 import logging
 import shutil
-import urlparse
+import urllib.parse
 
-from StringIO import StringIO
-from BaseHTTPServer import BaseHTTPRequestHandler
-from BaseHTTPServer import HTTPServer
+from io import StringIO
+from http.server import BaseHTTPRequestHandler
+from http.server import HTTPServer
 
 from idporten.saml import AuthRequest, Response
 
@@ -73,7 +73,7 @@ class SampleAppHTTPRequestHandler(BaseHTTPRequestHandler):
 
         length = int(self.headers['Content-Length'])
         data = self.rfile.read(length)
-        query = urlparse.parse_qs(data)
+        query = urllib.parse.parse_qs(data)
         res = Response(
             query['SAMLResponse'].pop(),
             self.settings['idp_cert_fingerprint'],
@@ -98,7 +98,7 @@ def main(config_file):
         datefmt='%Y-%m-%dT%H:%M:%S',
         )
 
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config_path = os.path.expanduser(config_file)
     config_path = os.path.abspath(config_path)
     with open(config_path) as f:
@@ -148,7 +148,7 @@ def main(config_file):
         with open(cert_path) as f:
             settings['idp_cert_fingerprint'] = f.read()
 
-    parts = urlparse.urlparse(settings['assertion_consumer_service_url'])
+    parts = urllib.parse.urlparse(settings['assertion_consumer_service_url'])
     SampleAppHTTPRequestHandler.protocol_version = 'HTTP/1.0'
     SampleAppHTTPRequestHandler.settings = settings
     SampleAppHTTPRequestHandler.saml_post_path = parts.path

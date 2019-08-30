@@ -19,7 +19,7 @@ class SignatureVerifierError(Exception):
 
 class SignatureVerifier(object):
     def __init__(self, idp_cert_filename, private_key_file):
-        print "Creating sign verifier"
+        print("Creating sign verifier")
         self.idp_cert_filename = idp_cert_filename
         self.private_key_file = private_key_file
 
@@ -93,7 +93,7 @@ class SignatureVerifier(object):
                 return False
 
         # If neither success nor failure
-        print output
+        print(output)
         if proc.returncode is not 0:
             msg = 'XMLSec returned error code %s. Please check your certficate.'
             raise SignatureVerifierError(msg % proc.returncode)
@@ -119,7 +119,7 @@ class SignatureVerifier(object):
             xml_filename,
             ]
 
-        print "COMMANDS", cmds
+        print("COMMANDS", cmds)
         proc = subprocess.Popen(
             cmds,
             stderr=subprocess.PIPE,
@@ -139,7 +139,7 @@ class SignatureVerifier(object):
             xml_filename
             ]
 
-        print "COMMANDS", cmds
+        print("COMMANDS", cmds)
         proc = subprocess.Popen(
             cmds,
             stderr=subprocess.PIPE,
@@ -154,6 +154,6 @@ class SignatureVerifier(object):
         xml_fp.write('<?xml version="1.0" encoding="utf-8"?>')
         xml_fp.write("<!DOCTYPE test [<!ATTLIST samlp:Response ID ID #IMPLIED>]>")
         xml_fp.write(doc_str)
-        print "XML:"
-        print doc_str
+        print("XML:")
+        print(doc_str)
         xml_fp.seek(0)

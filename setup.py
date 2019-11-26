@@ -42,7 +42,7 @@ tests_require = [
 
 setup(
     name='idporten.saml',
-    version='0.0.2',
+    version='0.0.3',
     description="Python client library for ID-porten SAML Version 2.0",
     packages = find_packages(),
     namespace_packages = ['idporten'],

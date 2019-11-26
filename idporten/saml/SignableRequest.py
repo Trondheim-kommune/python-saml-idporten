@@ -55,7 +55,7 @@ class SignableRequest(object):
         deflated_request = compressed_request[2:-4]
         encoded_request = _base64.b64encode(deflated_request)
         sig_alg = "http://www.w3.org/2000/09/xmldsig#rsa-sha1"
-        urlencoded_request = _urllib.urlencode(
+        urlencoded_request = urllib.parse.urlencode(
             [('SAMLRequest', encoded_request),
              ('SigAlg', sig_alg)],)
 

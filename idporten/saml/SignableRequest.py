@@ -2,6 +2,7 @@ import zlib
 import base64
 import uuid
 import urllib.request, urllib.parse, urllib.error
+from urllib.parse import urlencode
 import tempfile
 import subprocess as subp
 

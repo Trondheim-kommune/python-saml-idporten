@@ -107,7 +107,7 @@ ke+DV3hRFd9DgRJNuhEEn94jmsL9rjAnToX/1pFt9A==
 -----END RSA PRIVATE KEY-----"""
 
 
-            private_key_file.write(private_key)
+            private_key_file.write(private_key.encode('UTF-8'))
             private_key_file.seek(0)
 
             signed_url = req.get_signed_url(private_key_file.name,

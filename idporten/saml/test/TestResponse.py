@@ -97,7 +97,7 @@ class TestResponse(object):
 
     @fudge.with_fakes
     def test_get_name_id_simple(self):
-        encoded_response = base64.b64encode(test_response)
+        encoded_response = base64.b64encode(test_response.encode('UTF-8'))
         res = Response(
             response=encoded_response,
             signature=None,
@@ -165,7 +165,7 @@ class TestResponse(object):
    </saml:Assertion>
  </samlp:Response>
 """
-        encoded_response = base64.b64encode(response)
+        encoded_response = base64.b64encode(response.encode('UTF-8'))
         res = Response(
             response=encoded_response,
             signature=None,
@@ -233,7 +233,7 @@ class TestResponse(object):
    </saml:Assertion>
  </samlp:Response>
 """
-        encoded_response = base64.b64encode(response)
+        encoded_response = base64.b64encode(response.encode('UTF-8'))
         res = Response(
             response=encoded_response,
             signature=None,
@@ -304,7 +304,7 @@ class TestResponse(object):
    </saml:Assertion>
  </samlp:Response>
 """
-        encoded_response = base64.b64encode(response)
+        encoded_response = base64.b64encode(response.encode('UTF-8'))
         res = Response(
             response=encoded_response,
             signature=None,
@@ -374,7 +374,7 @@ class TestResponse(object):
    </saml:Assertion>
  </samlp:Response>
 """
-        encoded_response = base64.b64encode(response)
+        encoded_response = base64.b64encode(response.encode('UTF-8'))
         res = Response(
             response=encoded_response,
             signature=None,
@@ -392,7 +392,7 @@ class TestResponse(object):
 
     @fudge.with_fakes
     def test_is_valid_current_time_earlier(self):
-        encoded_response = base64.b64encode(test_response)
+        encoded_response = base64.b64encode(test_response.encode('UTF-8'))
         res = Response(
             response=encoded_response,
             signature=None,
@@ -414,7 +414,7 @@ class TestResponse(object):
 
     @fudge.with_fakes
     def test_is_valid_current_time_on_or_after(self):
-        encoded_response = base64.b64encode(test_response)
+        encoded_response = base64.b64encode(test_response.encode('UTF-8'))
         res = Response(
             response=encoded_response,
             signature=None,
@@ -436,7 +436,7 @@ class TestResponse(object):
 
     @fudge.with_fakes
     def test_is_valid_simple(self):
-        encoded_response = base64.b64encode(test_response)
+        encoded_response = base64.b64encode(test_response.encode('UTF-8'))
         fake_signature = 'foo signature'
         res = Response(
             response=encoded_response,

@@ -16,3 +16,6 @@
 /build
 /dist
 venv
+.noseids
+.vscode/
+nosetests.xml

@@ -81,13 +81,13 @@ class SignatureVerifier(object):
     @staticmethod
     def _parse_stderr(proc):
         output = proc.stderr.read()
-        for line in output.split('\n'):
+        for line in output.split(b'\n'):
             line = line.strip()
             if line == 'OK':
                 return True
             elif line == 'FAIL':
                 [log.info('XMLSec: %s' % line)
-                 for line in output.split('\n')
+                 for line in output.split(b'\n')
                  if line
                  ]
                 return False
@@ -151,8 +151,8 @@ class SignatureVerifier(object):
     @staticmethod
     def write_xml_to_file(document, xml_fp):
         doc_str = etree.tostring(document)
-        xml_fp.write('<?xml version="1.0" encoding="utf-8"?>')
-        xml_fp.write("<!DOCTYPE test [<!ATTLIST samlp:Response ID ID #IMPLIED>]>")
+        xml_fp.write(b'<?xml version="1.0" encoding="utf-8"?>')
+        xml_fp.write(b'<!DOCTYPE test [<!ATTLIST samlp:Response ID ID #IMPLIED>]>')
         xml_fp.write(doc_str)
         print("XML:")
         print(doc_str)

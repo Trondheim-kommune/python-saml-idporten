@@ -63,7 +63,7 @@ class TestAuthnRequest(object):
 
         fake_urllib = fudge.Fake('urllib')
         fake_urllib.remember_order()
-        fake_urlencode = fake_urllib.expects('urlencode')
+        fake_urlencode = fake_urllib.expects('parse.urlencode')
         fake_urlencode.with_args(
             [('SAMLRequest', 'foo_encoded'),
              ('SigAlg', 'http://www.w3.org/2000/09/xmldsig#rsa-sha1')]
